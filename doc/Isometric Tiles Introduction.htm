@@ -1,0 +1,254 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <style>
+body {text-align: center; font-family: helvetica, arial, sans-serif; font-size: 12pt;}
+#wrap {width: 768px; margin: 0 auto; text-align: left; background-color: #dddddd; padding: 1em; border-radius: 10px;}
+p {clear:  both;}
+h1 {text-align: center;}
+h2 {clear: both; border-top: solid 1px #666666; padding-top: 1em;}
+#footer {font-size: 9pt; color: #666666; margin: 2em;}
+li {margin-bottom: 0.5em;}
+img.inset {float: right; margin-left: 0.5em; margin-bottom: 0.5em;}
+p.figure {width: 650px; text-align: center; margin: 1em auto 2em auto;}
+  </style>
+  
+  <title>Isometric Tiles Introduction</title>
+  
+<script src="Isometric%20Tiles%20Introduction_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33359739-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  
+</head>
+<body>
+<div id="wrap">
+<h1>Isometric Tiles Introduction</h1>
+
+<p>
+This beginners tutorial is for those curious about making a game using 
+isometric tiles. We'll cover the very basics of what isometric tiles 
+are, why they're useful, and basic decisions to make when choosing 
+isometric tiles.
+</p>
+
+<h2>Common Projections</h2>
+
+<p>
+The visual world around us is three dimensional, but the games we play 
+(for now) are on a 2D screen. "Projection" is, in simple terms, the way 
+we "flatten" a 3D view into 2D.
+</p>
+
+<p class="figure">
+<img src="Isometric%20Tiles%20Introduction_files/dice.png" alt="Die projected in three views"><br>
+Three common projections of the same object
+</p>
+
+<p>
+There are several popular projections used in 2D games. The most popular
+ by far is to have the camera exactly on a major axis. This is common in
+ puzzle games and side scrollers, where each tile is a simple square and
+ the third dimension isn't visible at all. This view is often directly 
+overhead, or directly from one side. If we look at a cube in this view, 
+only one side would be visible (just the facing side).
+</p><p>
+
+</p><p class="figure">
+<a href="http://joyridelabs.de/game/"><img src="Isometric%20Tiles%20Introduction_files/nikki_and_the_robots.png" alt="Nikki and the Robots tiles example"><br>
+Nikki and the Robots</a>: side view
+</p>
+
+<p>
+Side note: I highly recommend making a game or tile set using this 
+simple projection before moving up to isometric! Basically everything 
+that applies to a flat 2D game also applied to isometric, but isometric 
+adds an extra layer of calculations.
+</p>
+
+<p>
+The next most common projection still uses square shaped tiles, but 
+changes the angle of the camera so we can see the third dimension. Games
+ using this projection add movement in that third dimension. We see this
+ projection common in early console-style RPGs and side scrolling 
+beat-em-ups. Our virtual "camera" is angled in one direction to get this
+ view. If we look at a cube in this view, two sides are visible (the top
+ and facing side).
+</p>
+
+<p class="figure">
+<a href="http://opengameart.org/content/liberated-pixel-cup-0"><img src="Isometric%20Tiles%20Introduction_files/liberated_pixel_cup.png" alt="Liberated Pixel Cup tiles example"><br>
+Liberated Pixel Cup</a>: top + side view
+</p>
+
+<p>
+For Isometric Projection we angle our camera along two axes (swing the 
+camera 45 degrees to one side, then 30 degrees down). This creates a 
+diamond (rhombus) shaped grid where the grid spaces are twice as wide as
+ they are tall. This style was popularized by strategy games and action 
+RPGs. If we look at a cube in this view, three sides are visible (top 
+and two facing sides).
+</p><p>
+
+</p><p class="figure">
+<a href="http://flarerpg.org/"><img src="Isometric%20Tiles%20Introduction_files/flare.png" alt="Flare tiles example"><br>
+Flare</a>: isometric view
+</p>
+
+<p>
+There are many other less-common projection styles available for 2D 
+games. The grid can be at a 45 degree angle but use "square" grid spaces
+ as seen in <a href="http://en.wikipedia.org/wiki/Ultima_Online">Ultima Online</a>. Or the grid can be square and 90 degree angles, with walls rising at 45 degrees as seen in <a href="http://en.wikipedia.org/wiki/Ultima_VII:_The_Black_Gate">Ultima 7</a>. Or the camera can be turned so that each axis is affected differently as in the original <a href="http://en.wikipedia.org/wiki/Fallout_%28video_game%29">Fallout games</a> (which actually use a hex grid).
+</p>
+
+<h2>Isometric Specifics</h2>
+
+<p>
+In true isometric projection, grid lines are all at 30 degrees and each 
+segment represents the same length -- making it useful in <a href="http://en.wikipedia.org/wiki/Isometric_projection">engineering diagrams</a>.
+</p>
+
+<p class="figure">
+<img src="Isometric%20Tiles%20Introduction_files/true_isometric.png" alt="Isometric diagram of struts and gears"><br>
+Isometric engineering diagram from 1822
+</p>
+
+
+<p>
+In video games when we say "isometric" we usually mean a view that's not
+ exactly isometric. Video game isometric prefers a slightly different 
+angle because we're working with whole pixels.
+</p>
+
+<p>
+The following diagram shows several lines drawn in pixels (zoomed in to 
+see details). Notice how the green lines look nice while the red lines 
+look jagged. This is because the green lines are using specific slopes 
+that fit exactly on a pixel grid. Our isometric line is the 1:2 slope --
+ draw two pixels horizontally for every one pixel vertically. This means
+ each isometric grid space is exactly twice as wide as it is tall (see 
+the blue isometric outline).
+</p>
+
+<p class="figure">
+<img src="Isometric%20Tiles%20Introduction_files/pixel_slopes.png" alt="Video game pixel slopes"><br>
+Nice vs. jagged pixel lines
+</p>
+
+<p>
+Because of this predictable 1:2 slope it is easy to create pixel art in isometric style. It's also easy to <a href="http://flarerpg.org/tutorials/isometric_tiles/">render 3D art in isometric projection</a>. In Blender we can use an orthographic camera to create isometric art:
+</p>
+
+<ul>
+  <li>Camera angle (60, 0, 45) for video-game style isometric (tiles that are 2x wide as they are tall)</li>
+  <li>Camera angle (54.736, 0, 45) for true engineering isometric (but jagged edges due to the angles)</li>
+</ul>
+
+<p>
+The pseudo-isometric projection not only makes pixel art crisp, but 
+makes map coordinates easy to handle. Every grid space is exactly 2x 
+wide as it is tall, so calculating the screen position of a particular 
+grid space is straight forward.
+</p>
+
+<h2>Choosing a Tile Size</h2>
+
+<p>
+Generally a game will use the same base tile size for the entire 
+project. So choosing the right size from the beginning is an important 
+task.
+</p>
+
+<p>
+First there's the pixel dimensions of the tile. In all video game art 
+it's common to stick with powers-of-two dimensions for images. So the 
+most common grid size of isometric games are 32x16, or 64x32, or 128x64.
+ Note that it's not really necessary to use a power of two. You might 
+decide 100x50 is easier to work with. Sticking with powers of two might 
+allow you to do nifty computing tricks (bit shifting instead of 
+multiplying/dividing). If you plan to make tiles that are reusable in 
+other projects/games, it's probably smart to stick with the traditional 
+sizes.
+</p>
+
+<p class="figure">
+<img src="Isometric%20Tiles%20Introduction_files/tile_sizes.png" alt="Tile size examples. 32x16, 64x32, and 128x64"><br>
+Common tile sizes
+</p>
+
+<ul>
+  <li>32x16 is a very small size but still useful on mobile devices or if using scaled-up pixel art.</li>
+  <li>64x32 is a common modern tile size, flexible for many game types.</li>
+  <li>128x64 is good for games with a high level of detail or displayed on HD resolutions.</li>
+</ul>
+
+<p>
+Even if you choose e.g. 64x32 base grid size, that doesn't mean every 
+image in your game will be 64px by 32px. It's common in isometric games 
+to have tall tiles that align with the bottom of the grid. A game using 
+64x32 might actually use 64px x 128px images for objects such as walls 
+-- or rather, each section of wall that fits exactly on one grid space. 
+Using tall tiles is useful for drawing objects in the correct z-order. 
+But more on that another time.
+</p>
+
+<p>
+Once you choose a tile size, you still need to think about what that tile size represents in 3D space:
+</p>
+
+<p class="figure">
+<img src="Isometric%20Tiles%20Introduction_files/tile_scales.png" alt="Tile scale examples. 1km scale is a mountain. 10m scale is a house. 1m scale is a person."><br>
+Example tile scales
+</p>
+
+<ul>
+  <li>If you're making a world conquest turn-based strategy, each tile might represent a 1km square area or more.</li>
+  <li>If you're making a city building simulation, one tile might be a 
+10m x 10m square. This could be the width of a city street or size of a 
+small building.</li>
+  <li>If you're making an RPG where the focus is on one hero, each tile might represent 1m square.</li>
+</ul>
+
+<p>
+This really depends on the genre of game and on the target display size.
+ I suggest mocking up screens of your game to get a feel for what size 
+and scale will work best. Then, choose a scale and stick with it. It 
+will be easier to create matching assets when you know exactly what size
+ each tile represents.
+</p>
+
+<p>
+That's it for our introduction. In the next part of this series we'll 
+look at approaches to making floor and wall tiles. If you have questions
+ about isometric tiles that you'd like me to answer during this series, 
+please <a href="http://clintbellanger.net/contact/">drop me a message</a>!
+</p>
+
+<h2>About the Author</h2>
+
+<p style="height: 200px;">
+<img class="inset" src="Isometric%20Tiles%20Introduction_files/clint_160x200.jpg">
+<a href="http://clintbellanger.net/">Clint Bellanger</a> is a software 
+developer who has been experimenting with video game code for 20 years 
+and 3D art for 10 years. His latest project is <a href="http://flarerpg.org/">Flare</a>, a Free/Libre action roleplaying engine.
+</p>
+
+  </div>
+  
+  <div id="footer">
+    This document is released under CC-BY-SA and the GFDL.
+  </div>
+
+
+
+
+
+</body></html>
