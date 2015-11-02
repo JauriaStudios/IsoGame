@@ -1,0 +1,295 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Isometric Tiles in Blender</title>
+  <style>
+body {text-align: center; font-family: helvetica, arial, sans-serif; font-size: 12pt;}
+#wrap {width: 768px; margin: 0 auto; text-align: left; background-color: #dddddd; padding: 1em; border-radius: 10px;}
+img.inset {float: right; margin-left: 0.5em; margin-bottom: 0.5em;}
+p {clear:  both;}
+h1 {text-align: center;}
+h2 {clear: both; border-top: solid 1px #666666; padding-top: 1em;}
+#footer {font-size: 9pt; color: #666666; margin: 2em;}
+li {margin-bottom: 0.5em;}
+  
+  </style>
+  
+  <script src="Isometric%20Tiles%20in%20Blender_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33359739-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+</head>
+<body>
+
+  <div id="wrap">
+  
+<h1>Isometric Tiles in Blender</h1>
+
+<p>
+In this tutorial we will create pre-rendered Isometric tiles for use in 2D games. This tutorial uses <a href="http://www.blender.org/">Blender</a> version 2.6.
+</p>
+
+<p>
+Note that this isn't true Engineering isometric where each angle is 60 
+degrees. In pixel-based video games we get cleaner diagonal lines by 
+using a <a href="http://en.wikipedia.org/wiki/Video_games_with_isometric_graphics">slightly different projection.</a> 
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/01_default.png">
+The default scene in Blender looks like this. Just a plain cube with a single point lamp.
+</p>
+
+<h2>Orthographic Camera</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/02_orthographic.png">
+The first thing we want to do is switch to an Orthographic camera. 
+Right-click to select the camera in 3D view. Then, click the Camera icon
+ in the Properties panel. Under the "Lens" section, choose Orthographic.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/03_ortho_render.png">
+In the result you'll see our cube is now in the correct perspective. In 
+isometric games, lines perpendicular to the ground plane should appear 
+parallel to each other. Put another way, Orthographic means objects 
+further away do not appear smaller. 
+</p>
+
+<h2>Isometric Camera Angle</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/04_camera_loc_rot.png">
+Next up, we want to set the camera angle for perfect isometric mode. In 
+video games when we say "isometric" we usually mean that the base tile 
+size is exactly 2x as wide as it are tall (e.g. 64x32). While the camera
+ is still selected and with the cursor over the 3D viewport, hit "N" to 
+show object properties.
+<br>
+<br>
+The Rotation settings are RotX = 60, RotY = 0, RotZ = 45. And while 
+we're there, let's put the camera in a predictable location: LocX = 10, 
+LocY = -10, LocZ = 10.
+<br>
+<br>
+Once these are set, you can hit N again to close the transform properties window.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/05_iso_render.png">
+What does this camera angle do? If you measure the top of this rendered 
+cube, you can verify that the pixel width is exactly twice the pixel 
+height.
+</p><p>
+
+</p><h2>Render Size</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/06_create_plane.png">
+We want our render output to be exactly the correct size for use in a 
+game. It's easier if we start with a simple floor tile. First, remove 
+the Cube by right-clicking and pressing Delete. Then using the top menu:
+ Add -&gt; Mesh -&gt; Plane.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/07_render_size.png">
+Let's change the Render size. In the Properties area switch to the 
+Render pane. Under the Dimensions section, change Resolution to X: 64 
+and Y: 32 and the Scale to 100%.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/08_render_64x32.png">
+The render output will now be correctly sized at 64x32 pixels, but the plane is off-center and too small.
+</p>
+
+<h2>Camera Location Z and Orthographic Scale</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/09_view_camera.png">
+Now we tweak the camera until the tile fits the output area. In the 3D 
+viewport, change to Camera view by pressing Numpad 0 or clicking View 
+-&gt; Camera.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/10_camera_outline.png">
+The 3D viewport now looks like this. Everything inside the dashed line 
+is what the camera sees. Everything outside the dashed line is darkened 
+and is outside the camera's view. Make sure the Camera is the selected 
+object -- do this by right-clicking the dashed outline of our camera's 
+view in 3D (the outline will glow).
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/11_orthographic_scale.png">
+Open the Camera Properties again (Properties menu, click the Camera) and notice the Orthographic Scale value.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/12_location_z.png">
+Open the Transform Properties panel again (N-key in 3D view) and notice the Location: Z value.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/13_scale_and_loc.png">
+Tweak these two values until the tile takes up the entire render area. 
+Orthographic Scale changes the "zoom" and Location Z changes the 
+vertical position. I change the Orthographic Scale first until the tile 
+is the correct width, then change Location Z until it is centered 
+vertically. Here I use Orthographic Scale: 2.800, Location Z: 8.170
+<br>
+<br>
+Hint: it's better for the tile to overflow slightly than to be too small. This helps prevent translucent seams between tiles.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/14_scale_loc_render.png">
+Now our pane is rendered at the correct size!
+</p>
+
+<h2>Transparency</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/15_transparency.png">
+Our tiles won't work well with that opaque background. Here's how to set
+ up a transparent background. In the Properties panel, switch to the 
+Render section. Under Output change to RGBA (only available in certain 
+formats, e.g. PNG).
+<br>
+<br>
+Under Shading switch Alpha Mode from Sky to Straight Alpha. Without 
+this, your tile's translucent edges will have the color of your 3D sky 
+(usually causing visible seams).
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/16_transparent_render.png">
+Now our render has correct transparency.
+</p>
+
+<h2>Lighting</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/17_sun_lamp.png">
+If you look closely at our tile you'll see that the left side is darker 
+than the right. This is because Point lamps are dimmer the further they 
+are away. We want to use lights that aren't affected by distance, such 
+as Sun lamps.<br>
+<br>
+In the 3D viewport switch to Top view (Numpad 7 or View -&gt; Top). 
+Select the Lamp (right-click). In the Properties menu, click the Lamp 
+button (where the Camera was before). Change the Lamp type from Point to
+ Sun.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/18_lit_render.png">
+Now our tile is evenly lit. Usually you'll want all your tiles to use 
+the same set of lights so that the angles of highlights and shadows are 
+consistent.
+</p>
+
+<p>
+<a href="http://clintbellanger.net/rpg/tutorials/isometric_tiles/isometric_tiles.blend">Click here to download this .blend file</a>
+</p>
+
+<h2>Tall Tiles</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/19_tall_tile.png">
+Not all of your tiles will be floor-shaped (64x32 here). You'll want 
+tall tiles that sit over the floor. Here we're going to create a Cube 
+tile. I deleted the Plane and added a Cube (making sure that it's 
+positioned at the origin). I changed the output resolution from 64x32 to
+ 64x128. Now I change the camera's Location Z and Orthographic Scale 
+again. If your object is sitting above the floor, you want to position 
+it at the bottom of the camera's view. Here I use Orthographic Scale: 
+5.600, Location Z: 9.600.
+</p>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/20_tall_tile_render.png">
+Here is the tall tile output. There is a bit of unused space above the 
+cube, but for most cases it's best to keep your tile dimensions at 
+powers of 2 (e.g. 16, 32, 64, 128, 256, 512).
+</p>
+
+<h2>Oversized Tiles</h2>
+
+<p>
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/21_oversized_tiles.png">
+Tiles that span multiple grid spaces can be created with just a couple 
+extra steps. Let's say I want to create a tall building that occupies a 
+2x3 tile area, and I calculate that the tile should be 160x256 pixels. 
+First, set the render output to the desired 160x256. Next, create a 
+"guide" plane that occupies the 2x3 tile area. Move the plane so that it
+ is centered on the origin (we want to position the tile instead of 
+changing the camera's Location X,Y).
+<br>
+<br>
+Now, simply tweak the camera's Orthographic Scale and Location Z just as
+ if you were creating a tall tile. Fit your guide plane to the left + 
+right + bottom of the camera's view. Now your output will correctly 
+capture this 2x3 tall tile.
+</p>
+
+
+<h2>Tips and Tricks</h2>
+
+<p>
+The above will get you most of the way there. Here are some additional hints that may save you some trouble later.
+</p>
+
+<ul>
+  <li>Set up a blank Blender scene that contains your isometric cameras,
+ lights, etc. Use it as your starting point when creating new tiles.</li>
+  <li>It helps to choose a fixed scale for your tiles. I prefer to use 1
+ blender unit = 1 meter, and 1 tile = 1 square meter. That way you can 
+keep all your assets at the same scale.</li>
+  <li>You might want to include casted shadows for tall tiles. Create a 
+large plane at Z=0 to catch shadows. Give it a material with Shadow 
+-&gt; "Shadows Only" enabled. I also set the material's Transparency 
+-&gt; Alpha to 0.500 for translucent shadows.</li>
+  <li>If you're rendering a large number of tiles, it's easy to pull 
+them together into a single tileset image with the ImageMagick tool 
+"montage".</li>
+  <li>To get finer details in your render (possibly at the expense of 
+noise), change the Anti-Aliasing size of Mitchell-Netravali from 1.000 
+to 1.500</li>
+  <li>I use guide planes often when working with multiple tiles. See an 
+example in Oversized Tiles, above. I create these by copying a plane and
+ deleting Faces Only (leaving the edges). Now the grid squares are 
+visible even when the guide plane isn't selected. And they are invisible
+ in renders because they have no faces.</li>
+</ul>
+
+<h2>About the Author</h2>
+
+<p style="height: 200px;">
+<img class="inset" src="Isometric%20Tiles%20in%20Blender_files/clint_160x200.jpg">
+<a href="http://clintbellanger.net/">Clint Bellanger</a> is a software 
+developer who has been experimenting with video game code for 20 years 
+and 3D art for 10 years. His latest project is <a href="http://flarerpg.org/">Flare</a>, a Free/Libre action roleplaying engine.
+</p>
+
+  </div>
+  
+  <div id="footer">
+    This document is released under CC-BY-SA and the GFDL.
+  </div>
+  
+
+
+</body></html>
