@@ -20,35 +20,95 @@ def load_image(name):
 	
 	return image
 
-class Sprite(object):         # Player class
-	def __init__(self, fname):
+class Sprite(pygame.sprite.Sprite):	# Player class
+	def __init__(self, fname, pos):
+		# Call the parent class (Sprite) constructor
+		pygame.sprite.Sprite.__init__(self)
+		
+		
 		self.sprite_width, self.sprite_height = 64, 64
-
-		self.sprites = []
-		self.sprite = self.load(fname)
-
-	def load(self, name):
-		self.spritesheet = load_image("%s.png" % name)
 		
-		spritesheet_size = self.spritesheet.get_rect()
-		sprites_x, sprites_y = spritesheet_size[2]/64, spritesheet_size[3]/64
+		self.walk_index = 0
+		self.standby_index = 0
 		
+		self.direction = 0
+		
+		self.pos_x = pos[0]
+		self.pos_y = pos[1]
+		
+		self.speed_x = 4
+		self.speed_y = 2
+		
+		self.moving = False
+		
+		self.move_sprites = self.load_spritesheet("player", "walk")
+		self.standby_sprites = self.load_spritesheet("player", "standby")
+		
+		self.player_move = []
+		self.player_standby = []
+		
+		self.player_move.append(self.move_sprites[0:31]) #DOWN
+		self.player_move.append(self.move_sprites[32:63]) #RIGHT
+		self.player_move.append(self.move_sprites[64:95]) #UP
+		self.player_move.append(self.move_sprites[96:127]) #LEFT
+		
+		self.player_standby.append(self.standby_sprites[0:63]) #DOWN
+		self.player_standby.append(self.standby_sprites[64:127]) #RIGHT
+		self.player_standby.append(self.standby_sprites[128:191]) #UP
+		self.player_standby.append(self.standby_sprites[192:255]) #LEFT
+		
+		
+		self.image = self.player_standby[self.direction][self.standby_index]
+		self.rect = self.image.get_rect()
+
+
+	def load_spritesheet(self, fname, tname):
+		spritesheet = load_image("%s_%s.png" % (fname, tname))
+		
+		sprites = []
+		spritesheet_size = spritesheet.get_rect()
+		sprites_x, sprites_y = spritesheet_size[2]/self.sprite_width, spritesheet_size[3]/self.sprite_height
 		
 		for y in range(sprites_y):
 			for x in range(sprites_x):
 				
 				sprite = pygame.Surface((self.sprite_width,self.sprite_height), pygame.SRCALPHA, 32).convert_alpha()
-				sprite.blit(self.spritesheet, (0, 0), (x*64,y*64,(x*64)+64,(y*64)+64))
+				sprite.blit(spritesheet, (0, 0), (x*64,y*64,(x*64)+64,(y*64)+64))
 				
-				self.sprites.append(sprite)
-				
-		return self.sprites
+				sprites.append(sprite)
+		return sprites
 
-	def draw(self,screen):
+	def draw(self, screen):
+		screen.blit(self.image, (self.pos_x, self.pos_y))
+
+	def move(self, direction):
+		self.direction = direction
+		self.moving = True
+		self.standby_index = 0
 		
-		self.player_move_up = self.sprites[0::32]
-		self.player_move_down = self.sprites[33:65]
-		self.player_move_left = self.sprites[66:98]
-		self.player_move_right = self.sprites[98:130]
-		
-		screen.blit(self.player_move_down[0], (200,200))
+		if self.direction == 0:
+			self.pos_x -= self.speed_x
+			self.pos_y += self.speed_y
+		elif self.direction == 1:
+			self.pos_x += self.speed_x
+			self.pos_y += self.speed_y
+		elif self.direction == 2:
+			self.pos_x += self.speed_x
+			self.pos_y -= self.speed_y
+		elif self.direction == 3:
+			self.pos_x -= self.speed_x
+			self.pos_y -= self.speed_y
+
+	def update(self):
+		if self.moving:
+			self.walk_index += 1
+			if self.walk_index >= len(self.player_move[self.direction]):
+				self.walk_index = 0
+			self.image = self.player_move[self.direction][self.walk_index]
+		else:
+			self.standby_index += 1
+			if self.standby_index >= len(self.player_standby[self.direction]):
+				self.standby_index = 0
+			self.image = self.player_standby[self.direction][self.standby_index]
+			
+		self.moving = False
