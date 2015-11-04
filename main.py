@@ -22,7 +22,7 @@ class MainGame(object):	# Game class
 		pygame.mixer.pre_init(44100, -16, 2, 2048)  # sounds
 		pygame.init()
 		pygame.display.set_caption("IsoGame")  # Set app name
-		pygame.key.set_repeat(100, 20)
+		pygame.key.set_repeat(1, 20)
 		
 		self.width, self.height = 800, 600
 		
