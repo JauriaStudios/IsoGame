@@ -4,8 +4,9 @@ python:
     - "3.5"
 install:
     - pip install -r requirements.txt
-before_install:
-    - sudo apt-get update
-    - sudo apt-get build-dep python-pygame
-    - sudo apt-get install mercurial
+addons:
+  apt:
+    packages:
+    - python-pygame
 script: nosetests
+sudo: false
