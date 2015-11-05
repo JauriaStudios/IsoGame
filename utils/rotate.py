@@ -4,7 +4,7 @@ import os
 
 import math
 
-from time import sleep
+angle = 45
 
 tx = 10.0
 ty = -10.0
@@ -45,9 +45,9 @@ bpy.ops.object.select_by_type(type="EMPTY")
 
 output_path = bpy.context.scene.render.filepath
 
-for i in range(4):
+for i in range(8):
     
-    bpy.context.scene.objects.active.rotation_euler[2] = math.radians(i*90)
+    bpy.context.scene.objects.active.rotation_euler[2] = math.radians(i*angle)
     
     bpy.context.scene.render.filepath = os.path.join(output_path, str(i) + "-")
     

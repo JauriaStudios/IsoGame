@@ -15,9 +15,10 @@ if not pygame.font:
 if not pygame.mixer:
 	print 'Warning, sound disabled'
 
+BLACK = (0x00, 0x00, 0x00)
 
 class MainGame(object):	# Game class
-
+	
 	def __init__(self):
 		pygame.mixer.pre_init(44100, -16, 2, 2048)  # sounds
 		pygame.init()
@@ -33,7 +34,7 @@ class MainGame(object):	# Game class
 		self.level= Level("level1")
 		
 		self.player = Sprite("player", (100,100))
-
+	
 	""" main function """
 	def main(self):
 		while True:
@@ -42,20 +43,15 @@ class MainGame(object):	# Game class
 			for event in pygame.event.get():
 				if event.type == QUIT:
 					return
-				elif event.type == KEYDOWN and event.key == K_ESCAPE:
-					return
-				elif event.type == KEYDOWN and event.key == K_DOWN:
-					self.player.move(0)
-				elif event.type == KEYDOWN and event.key == K_RIGHT:
-					self.player.move(1)
-				elif event.type == KEYDOWN and event.key == K_UP:
-					self.player.move(2)
-				elif event.type == KEYDOWN and event.key == K_LEFT:
-					self.player.move(3)
-			
-			self.screen.fill((0x00,0x00,0x00))
-			
+				if event.type == pygame.KEYDOWN:
+					if event.key == K_ESCAPE:
+						return
+				
+				self.player.handle_event(event)
+				
 			self.player.update()
+			
+			self.screen.fill(BLACK)
 			
 			self.level.draw(self.screen)
 			self.player.draw(self.screen)
