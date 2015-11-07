@@ -2,8 +2,6 @@
 
 import os
 
-import pytmx
-
 import pygame
 from pygame.locals import *
 
@@ -31,14 +29,32 @@ class MainGame(object):	# Game class
 		
 		self.clock = pygame.time.Clock()
 		
-		self.level= Level("level1")
-		
 		self.player = Sprite("player", (100,100))
+		
+		self.levelLayer1 = Level("level1", "background")
+		self.levelLayer2 = Level("level1", "layer1")
+		self.levelLayer3 = Level("level1", "layer2")
+		self.levelLayer4 = Level("level1", "layer3")
+		self.levelLayer5 = Level("level1", "layer4")
+		self.levelLayer6 = Level("level1", "layer5")
+		
+		
+		self.levelBGGroup = pygame.sprite.OrderedUpdates()
+		self.levelGroup = pygame.sprite.OrderedUpdates()
+		
+		self.levelBGGroup.add(self.levelLayer1)
+		
+		self.levelGroup.add(self.levelLayer2)
+		self.levelGroup.add(self.levelLayer3)
+		self.levelGroup.add(self.levelLayer4)
+		self.levelGroup.add(self.levelLayer5)
+		self.levelGroup.add(self.levelLayer6)
+		
 	
 	""" main function """
 	def main(self):
 		while True:
-			self.clock.tick(60)
+			self.clock.tick(30)
 			
 			for event in pygame.event.get():
 				if event.type == QUIT:
@@ -53,8 +69,13 @@ class MainGame(object):	# Game class
 			
 			self.screen.fill(BLACK)
 			
-			self.level.draw(self.screen)
+			self.levelBGGroup.draw(self.screen)
+			
 			self.player.draw(self.screen)
+			
+			self.levelGroup.draw(self.screen)
+			
+			
 			
 			pygame.display.flip()
 

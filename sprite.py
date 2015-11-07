@@ -22,6 +22,7 @@ def load_image(name):
 
 class Sprite(pygame.sprite.Sprite):	# Player class
 	def __init__(self, fname, pos):
+		
 		# Call the parent class (Sprite) constructor
 		pygame.sprite.Sprite.__init__(self)
 		
