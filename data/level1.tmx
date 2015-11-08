@@ -1,36 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="25" height="25" tilewidth="64" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="isometric" renderorder="right-down" width="25" height="25" tilewidth="64" tileheight="32" nextobjectid="38">
  <tileset firstgid="1" name="iso-64x64-outside" tilewidth="64" tileheight="32" tilecount="320">
   <image source="iso-64x64-outside.png" trans="00ff00" width="640" height="1024"/>
  </tileset>
- <layer name="Capa de Patrones 1" width="25" height="25">
+ <layer name="background" width="25" height="25">
   <data encoding="base64" compression="zlib">
    eJztw8EJAAAMA6H7Z/99O0dBwVVTVfXVA2h9Gtw=
   </data>
  </layer>
- <layer name="Capa de patrones 2" width="25" height="25">
+ <layer name="layer1" width="25" height="25">
   <data encoding="base64" compression="zlib">
    eJxjYBj+4PUwtmMLEG9GwhtpYMcmIN6AhNeOQDtm4MDoYB0Qr0HCq0mwAx+YTiVzRgECsDDSxlxzoLmC1DYbap4lmrnMNPIDrc0Ggf/IHCraZUFjd2MANPv8aWwdyPxoNDEbevt5FAwaAAA/ph3U
   </data>
  </layer>
- <layer name="Capa de patrones 3" width="25" height="25">
+ <layer name="layer2" width="25" height="25">
   <data encoding="base64" compression="zlib">
    eJxjYBg48HDUjlE7KAT9WHAfle3AB3rpaNdIAb9oZK4uIwMDOyNtzNZHM/cnbayhudm0BHo0CntKgDGV3RSIxjeisZ8NB2GYjgL6AgDMbQ2Y
   </data>
  </layer>
- <layer name="Capa de patrones 4" width="25" height="25">
+ <layer name="layer3" width="25" height="25">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIKBA8qMDAx/aWS2KiONDB5GQGUQhpEmjd2kQWPz1QdhmI6C4QkAkN4B6A==
   </data>
  </layer>
- <layer name="Capa de patrones 5" width="25" height="25">
+ <layer name="layer4" width="25" height="25">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjAJMIMnIwPCZRmZLM9LI4GEEpAZhGMnT2E1yNDZflhGCR8EoGC4AAHt9AcA=
   </data>
  </layer>
- <layer name="Capa de patrones 6" width="25" height="25">
+ <layer name="layer5" width="25" height="25">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUDCXAzzjQLhjZQGA0/EfBKBgFgwQAALhSACI=
   </data>
  </layer>
+ <objectgroup name="Capa de Objetos 1">
+  <object id="1" name="Muros" x="257.536" y="65.1848">
+   <polygon points="0,0 0,221.655 -198.691,218.66 -198.192,178.223 -35.4449,179.221 -36.9425,2.99534"/>
+  </object>
+  <object id="12" name="Lago" x="386.835" y="129.585">
+   <polygon points="0,0 2.99534,158.753 155.758,157.755 158.254,-2.49612"/>
+  </object>
+  <object id="15" name="Rampa" x="571.547" y="633.8">
+   <polygon points="4.49301,9.48525 71.389,6.48991 66.896,-60.9053"/>
+  </object>
+  <object id="16" name="Tronco" x="577.538" y="531.959">
+   <polyline points="0,0 31.9503,1.99689"/>
+  </object>
+  <object id="17" name="Tronco" x="485.681" y="505.999">
+   <polyline points="0,0 4.49301,35.4449"/>
+  </object>
+  <object id="18" name="Tronco" x="378.348" y="467.559">
+   <polyline points="0,0 34.4464,-0.499224"/>
+  </object>
+  <object id="19" name="Tronco" x="480.189" y="597.357">
+   <polyline points="0,0 27.9565,-1.99689"/>
+  </object>
+  <object id="29" name="Seto" x="565.557" y="452.083" width="40.9363" height="22.9643">
+   <ellipse/>
+  </object>
+  <object id="30" name="Seto" x="595" y="379" width="33.5" height="24.5">
+   <ellipse/>
+  </object>
+  <object id="31" name="Seto" x="511.641" y="492.021" width="32.9488" height="22.9643">
+   <ellipse/>
+  </object>
+  <object id="36" name="Roca" x="281.998" y="292.332" width="37.4418" height="24.462">
+   <ellipse/>
+  </object>
+ </objectgroup>
 </map>
