@@ -25,7 +25,8 @@ class MainGame(object):	# Game class
 		
 		self.width, self.height = 800, 600
 		
-		self.screen = pygame.display.set_mode((self.width, self.height))
+		self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
+		self.temp_surface = pygame.Surface((self.width / 1.5, self.height / 1.5)).convert()
 		
 		self.clock = pygame.time.Clock()
 		
@@ -59,23 +60,27 @@ class MainGame(object):	# Game class
 			for event in pygame.event.get():
 				if event.type == QUIT:
 					return
-				if event.type == pygame.KEYDOWN:
+				elif event.type == pygame.KEYDOWN:
 					if event.key == K_ESCAPE:
 						return
+				# this will be handled if the window is resized
+				elif event.type == VIDEORESIZE:
+					self.screen = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+					#self.map_layer.set_size((event.w / 2, event.h / 2))
 				
 				self.player.handle_event(event)
 				
 			self.player.update()
 			
-			self.screen.fill(BLACK)
+			self.temp_surface.fill(BLACK)
 			
-			self.levelBGGroup.draw(self.screen)
+			self.levelBGGroup.draw(self.temp_surface)
 			
-			self.player.draw(self.screen)
+			self.player.draw(self.temp_surface)
 			
-			self.levelGroup.draw(self.screen)
+			self.levelGroup.draw(self.temp_surface)
 			
-			
+			pygame.transform.scale(self.temp_surface, self.screen.get_size(), self.screen)
 			
 			pygame.display.flip()
 
