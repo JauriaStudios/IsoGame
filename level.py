@@ -45,20 +45,11 @@ class Level(object):	# Level class
 		
 		self.map_layer = pyscroll.BufferedRenderer(self.map_data, (self.width / 2, self.height / 2), clamp_camera=True)
 		
-	def group(self):
 		self.group = PyscrollGroup(map_layer=self.map_layer, default_layer=2)
 		
+	def get_group(self):
+		
 		return self.group
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		"""

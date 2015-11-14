@@ -38,7 +38,7 @@ class MainGame(object):	# Game class
 		
 		self.level = Level("level1")
 		
-		self.levelGroup = self.level.group()
+		self.levelGroup = self.level.get_group()
 		self.levelGroup.add(self.player)
 	
 	def draw(self, screen):
