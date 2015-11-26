@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="25" height="25" tilewidth="64" tileheight="32" nextobjectid="38">
+<map version="1.0" orientation="isometric" renderorder="right-down" width="25" height="25" tilewidth="64" tileheight="32" nextobjectid="41">
  <tileset firstgid="1" name="iso-64x64-outside" tilewidth="64" tileheight="32" tilecount="320">
   <image source="iso-64x64-outside.png" trans="00ff00" width="640" height="1024"/>
  </tileset>
@@ -10,12 +10,12 @@
  </layer>
  <layer name="layer1" width="25" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBj+4PUwtmMLEG9GwhtpYMcmIN6AhNeOQDtm4MDoYB0Qr0HCq0mwAx+YTiVzRgECsDDSxlxzoLmC1DYbap4lmrnMNPIDrc0Ggf/IHCraZUFjd2MANPv8aWwdyPxoNDEbevt5FAwaAAA/ph3U
+   eJxjYBie4D8S+zUd7KO2Hf+xiGGzYwsQb0bCGym0F5sdm4B4AxJeOwLtmIEDo4N1QLwGCa8mwQ58YDqVzBkFCMDCSBtzzYHmClLbbKh5lmjmMtPID7Q2GwRQyjgy7XqORcyCxu7GAGj2+dPYOpD50WhiNvT28ygYNAAAAFYguQ==
   </data>
  </layer>
  <layer name="layer2" width="25" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBg48HDUjlE7KAT9WHAfle3AB3rpaNdIAb9oZK4uIwMDOyNtzNZHM/cnbayhudm0BHo0CntKgDGV3RSIxjeisZ8NB2GYjgL6AgDMbQ2Y
+   eJxjYBg48HDUjlE7KAT9WHAfle3AB3rpaNdIAb9oZK4uIwMDOyNtzNZHM/cnbayhudnUAnexiOnRKOwpAcZUdlMgGt+Ixn42HIRhOgroCwDA1g51
   </data>
  </layer>
  <layer name="layer3" width="25" height="25">
@@ -65,6 +65,9 @@
    <ellipse/>
   </object>
   <object id="36" name="Roca" x="281.998" y="292.332" width="37.4418" height="24.462">
+   <ellipse/>
+  </object>
+  <object id="38" name="Seto" x="216" y="544.667" width="35.3333" height="22">
    <ellipse/>
   </object>
  </objectgroup>

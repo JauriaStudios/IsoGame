@@ -81,14 +81,15 @@ class MainGame(object):	# Game class
 
 				self.player.handle_event(event)
 
-			self.player.update()
+			#self.player.update()
 			#self.update(dt)
 
 			self.temp_surface.fill(BLACK)
-			#self.draw(self.temp_surface)
+			self.draw(self.temp_surface)
 			self.player.draw(self.temp_surface)
 
 			pygame.transform.scale(self.temp_surface, self.screen.get_size(), self.screen)
+
 
 			pygame.display.flip()
 
