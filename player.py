@@ -20,7 +20,7 @@ def load_image(name):
 	
 	return image
 
-class Sprite(pygame.sprite.Sprite):	# Player class
+class Player(pygame.sprite.Sprite):	# Player class
 	def __init__(self, fname, pos):
 		
 		# Call the parent class (Sprite) constructor
