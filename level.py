@@ -9,7 +9,7 @@ from pygame.locals import *
 
 import pyscroll
 import pyscroll.data
-from pyscroll.util import PyscrollGroup
+from pyscroll.group import PyscrollGroup
 
 if not pygame.font:
 	print 'Warning, fonts disabled'

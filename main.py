@@ -7,7 +7,7 @@ from pygame.locals import *
 
 import pyscroll
 import pyscroll.data
-from pyscroll.util import PyscrollGroup
+from pyscroll.group import PyscrollGroup
 
 from player import Player
 from level import Level
